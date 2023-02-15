@@ -54,6 +54,6 @@ class FuncionarioLogin(Profile):
     funcionario = models.OneToOneField('Funcionario', on_delete=models.DO_NOTHING, null=True)
     objects = UserManager()
 
-class Funcionario(Pessoa):
+class Funcionario(Pessoa, core.EnderecoMeta):
     cargo = models.CharField(null=True, max_length=200)
     # empresa = models.ForeignKey('Conta', on_delete=models.DO_NOTHING, null=True)
