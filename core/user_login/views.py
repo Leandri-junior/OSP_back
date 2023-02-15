@@ -4,6 +4,9 @@ from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
 from django.views import View
 
+class CadastroUser(View):
+    def get(self, request):
+        pass
 
 class LoginUser(View):
     def get(self, request):

@@ -1,5 +1,5 @@
 from django.contrib.auth.base_user import AbstractBaseUser
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
 
 import core.models
@@ -52,7 +52,7 @@ class Profile(AbstractBaseUser, core.models.DatLog):
 
 class FuncionarioLogin(Profile):
     funcionario = models.OneToOneField('Funcionario', on_delete=models.DO_NOTHING, null=True)
-
+    objects = UserManager()
 
 class Funcionario(Pessoa):
     cargo = models.CharField(null=True, max_length=200)
