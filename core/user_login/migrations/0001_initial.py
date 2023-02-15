@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('password', models.CharField(max_length=128, verbose_name='password')),
-                ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last login')),
+                ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last user_login')),
                 ('dat_insercao', models.DateTimeField(auto_now_add=True, null=True)),
                 ('dat_edicao', models.DateTimeField(auto_now=True, null=True)),
                 ('dat_delete', models.DateTimeField(blank=True, null=True)),
@@ -47,7 +47,7 @@ class Migration(migrations.Migration):
                 ('is_primeiro_login', models.BooleanField(default=True, null=True)),
                 ('is_resetar_senha', models.BooleanField(default=False, null=True)),
                 ('senha_padrao', models.CharField(max_length=200, null=True)),
-                ('funcionario', models.OneToOneField(null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='login.funcionario')),
+                ('funcionario', models.OneToOneField(null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='user_login.funcionario')),
             ],
             options={
                 'abstract': False,

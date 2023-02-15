@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 
-from core import login
+from core import user_login
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +27,7 @@ SECRET_KEY = 'o%4_e#kboz74@6*5719^#k662%7+qx!)erppe-q^itv9gsqecn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-# AUTH_USER_MODEL = 'login.FuncionarioLogin'
+AUTH_USER_MODEL = 'user_login.FuncionarioLogin'
 ALLOWED_HOSTS = []
 
 
@@ -39,8 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'core',
-    
+    'core.user_login',
+
 ]
 
 MIDDLEWARE = [

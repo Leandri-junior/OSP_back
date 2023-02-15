@@ -1,8 +1,8 @@
 from django.apps import AppConfig
 
 
-from core import login
+from core import user_login
 
 
 class LoginConfig(AppConfig):
-    name = "login"
+    name = "core.user_login"

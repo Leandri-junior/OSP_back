@@ -16,9 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path, include
 
-import core.login.urls
+import core.user_login.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path('', include(core.login.urls)),
+    re_path('', include(core.user_login.urls)),
 ]
