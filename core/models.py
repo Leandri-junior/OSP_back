@@ -5,9 +5,9 @@ class DatLog(models.Model):
     dat_insercao = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     dat_edicao = models.DateTimeField(auto_now=True, null=True, blank=True)
     dat_delete = models.DateTimeField(null=True, blank=True)
-
+    status = models.BooleanField(null=False, default=True)
     class Meta:
-        managed = False
+
         abstract = True
 
 class EnderecoMeta(models.Model):
@@ -27,5 +27,4 @@ class EnderecoMeta(models.Model):
     longitude = models.CharField(max_length=200, null=True)
 
     class Meta:
-        managed = False
         abstract = True

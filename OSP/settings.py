@@ -41,8 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'core.empresa',
     'core',
     'core.user_login',
+
 
 ]
 
@@ -83,7 +85,7 @@ WSGI_APPLICATION = 'OSP.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'osb',
+        'NAME': 'OSP',
         'USER': 'root',
         'PASSWORD': '3265',
         'HOST': '127.0.0.1',
@@ -127,6 +129,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

@@ -1,8 +1,9 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
-
+import core.empresa.models
 import core.models
+
 
 
 class Pessoa(core.models.DatLog):
@@ -35,7 +36,7 @@ class Pessoa(core.models.DatLog):
         abstract = True
 
 
-class Profile(AbstractBaseUser, core.models.DatLog):
+class Profile(AbstractBaseUser, core.models.DatLog, core.models.EnderecoMeta):
     # conta_user = models.OneToOneField('ContaUser', on_delete=models.DO_NOTHING, null=True)
     # tipo_conta = models.CharField(null=True, max_length=200, default='usr')
     username = models.CharField(max_length=200, unique=True)
@@ -54,6 +55,5 @@ class FuncionarioLogin(Profile):
     funcionario = models.OneToOneField('Funcionario', on_delete=models.DO_NOTHING, null=True)
     objects = UserManager()
 
-class Funcionario(Pessoa, core.EnderecoMeta):
+class Funcionario(Pessoa):
     cargo = models.CharField(null=True, max_length=200)
-    # empresa = models.ForeignKey('Conta', on_delete=models.DO_NOTHING, null=True)
