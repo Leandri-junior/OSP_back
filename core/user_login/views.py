@@ -13,10 +13,15 @@ from OSP import settings
 
 class CadastroUser(View):
     def post(self, request):
-        response = json.loads(self.request.body)
-        username = f"{response['nm_primeiro']}.{response['nm_ultimo']}"
-        novoUsuario = core.user_login.models.FuncionarioLogin.objects.create_user(username=username,email=response['email'], password= response['password'])
-        novoUsuario.save()
+        try:
+            response = json.loads(self.request.body)
+            username = f"{response['nm_primeiro']}.{response['nm_ultimo']}"
+            novoUsuario = core.user_login.models.FuncionarioLogin.objects.create_user(username=username,email=response['email'], password= response['password'])
+            novoUsuario.save()
+            status = {'status':True}
+        except:
+            status ={'status': False}
+        return JsonResponse(status)
 class LoginUser(View):
 
     def post(self, request):
