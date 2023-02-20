@@ -4,9 +4,7 @@ import jwt
 from django.contrib.auth import authenticate, login, user_logged_in
 from django.http import JsonResponse
 from django.views import View
-from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
-from rest_framework.response import Response
 from rest_framework_jwt.utils import jwt_payload_handler
 
 import core.user_login.models
@@ -14,9 +12,11 @@ from OSP import settings
 
 
 class CadastroUser(View):
-    def get(self, request):
-        pass
-
+    def post(self, request):
+        response = json.loads(self.request.body)
+        username = f"{response['nm_primeiro']}.{response['nm_ultimo']}"
+        novoUsuario = core.user_login.models.FuncionarioLogin.objects.create_user(username=username,email=response['email'], password= response['password'])
+        novoUsuario.save()
 class LoginUser(View):
 
     def post(self, request):
