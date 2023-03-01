@@ -18,8 +18,10 @@ from django.urls import path, re_path, include
 from django.views.decorators.csrf import csrf_exempt
 
 import core.user_login.urls
+import core.cliente.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path('', include(csrf_exempt(core.user_login.urls))),
+    re_path('cliente/', include(core.cliente.urls)),
+    re_path('', include(core.user_login.urls)),
 ]

@@ -7,6 +7,7 @@ from django.views import View
 from rest_framework import status
 from rest_framework_jwt.utils import jwt_payload_handler
 
+import BO.funcionario.login
 import core.user_login.models
 from OSP import settings
 
@@ -40,8 +41,11 @@ class LoginUser(View):
                 user_details['token'] = token
                 user_logged_in.send(sender=user.__class__,
                                     request=request, user=user)
+
+                empresa_user = BO.funcionario.login.Login.get_empresa(self, user)
                 response = {
                     'user': user_details['name'],
+                    'empresa': empresa_user,
                     'token': user_details['token'].decode('UTF-8'),
                     'status': status.HTTP_200_OK
                 }

@@ -47,12 +47,13 @@ INSTALLED_APPS = [
     'core.empresa',
     'core',
     'core.user_login',
+    'core.cliente',
 
 
 ]
 
 MIDDLEWARE = [
-        "corsheaders.middleware.CorsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

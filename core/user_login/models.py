@@ -18,35 +18,43 @@ class Pessoa(core.models.DatLog):
 
     rg = models.CharField(max_length=15, null=True)
     rg_form = models.CharField(max_length=15, null=True)
+    is_estrangeiro =models.BooleanField(default=False)
+    passaporte = models.CharField(max_length=200, null=True)
+    passaporte_form = models.CharField(max_length=200, null=True)
+    local_nascimento = models.CharField(max_length=200, null=True)
+    dat_nasc = models.DateField(null=True)
+    naturalidade = models.CharField(max_length=200, null=True)
+    nascionalidade = models.CharField(max_length=200, null=True)
 
-    # passaporte = models.CharField(max_length=200, null=True)
-    # passaporte_form = models.CharField(max_length=200, null=True)
-    #
-    # dat_nasc = models.DateField(null=True)
-    #
-    # imagem = models.FileField(upload_to='fotos/usuarios', default='fotos/sem-foto.png', null=True)
-    #
-    # nm_mae = models.CharField(max_length=200, null=True)
-    # nm_pai = models.CharField(max_length=200, null=True)
-    #
-    # cr_codigo = models.CharField(max_length=50, null=True)
-    # cr_uf = models.ForeignKey('core.UF', on_delete=models.DO_NOTHING, null=True,
-    #                           related_name='%(app_label)s_%(class)s_cr_uf')
-    #
+
+    imagem = models.FileField(upload_to='fotos/usuarios', default='fotos/sem-foto.png', null=True)
+
+    nm_mae = models.CharField(max_length=200, null=True)
+    nm_pai = models.CharField(max_length=200, null=True)
+    SEXO = (
+        ('F', _('Femenino')),
+        ('M', _('Masculino')),
+        ('O', _('Outros'))
+    )
+    sexo = models.CharField(max_length=1, choices=SEXO, null=True)
+
 
     class Meta:
         abstract = True
 
 
+
 class Profile(AbstractBaseUser, core.models.DatLog, PermissionsMixin):
-    # conta_user = models.OneToOneField('ContaUser', on_delete=models.DO_NOTHING, null=True)
-    # tipo_conta = models.CharField(null=True, max_length=200, default='usr')
+    empresa = models.ForeignKey('empresa.Empresa', on_delete=models.DO_NOTHING, null=True)
+    filial = models.ForeignKey('empresa.FilialEmpresa', on_delete=models.DO_NOTHING, null=True)
+    tipo_conta = models.CharField(null=True, max_length=200, default='usr')
     username = models.CharField(max_length=200, unique=True)
     USERNAME_FIELD = 'username'
     is_staff = models.BooleanField(null=True, default=False)
     is_atualizar_sessao = models.BooleanField(default=False, null=True)
     is_primeiro_login = models.BooleanField(default=True, null=True)
     is_resetar_senha = models.BooleanField(default=False, null=True)
+    senha_padrao = models.CharField(null=True, max_length=200)
     senha_padrao = models.CharField(null=True, max_length=200)
     email = models.EmailField(max_length=200, null=True)
     is_superuser = models.BooleanField(
@@ -87,5 +95,10 @@ class FuncionarioLogin(Profile):
     nm_ultimo = models.CharField(max_length=200, null=True)
     objects = UserManager()
 
+    class Meta:
+        db_table = 'FuncionarioLogin'
+
 class Funcionario(Pessoa, core.models.EnderecoMeta):
     cargo = models.CharField(null=True, max_length=200)
+    class Meta:
+        db_table = 'Funcionario'
